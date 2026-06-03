@@ -1,4 +1,4 @@
-package jatekter;
+package Osztalyok;
 
 import java.util.Objects;
 

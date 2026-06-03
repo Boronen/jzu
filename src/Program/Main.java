@@ -1,4 +1,9 @@
-package jatekter;
+package Program;
+
+import Osztalyok.Harcos;
+import Osztalyok.Jatekter;
+import Osztalyok.Varazslo;
+
 public class Main {
 
     public static void main(String[] args) {

@@ -1,19 +1,13 @@
 package jatekter;
 
 import java.util.Objects;
-
-/**
- * Absztrakt alap osztaly a karakterekhez.
- */
 public abstract class Karakter {
 
-    // --- Adatmezok ---
     private String nev;
     private int hp;
     private int dmg;
     private int speed;
 
-    // --- Konstruktor ---
     public Karakter(String nev, int hp, int dmg, int speed) {
         this.nev = nev;
         this.hp = hp;
@@ -21,7 +15,6 @@ public abstract class Karakter {
         this.speed = speed;
     }
 
-    // --- Getterek es Setterek ---
     public String getNev() {
         return nev;
     }
@@ -54,22 +47,12 @@ public abstract class Karakter {
         this.speed = speed;
     }
 
-    // --- Absztrakt metodus ---
-    /**
-     * A karakter tamadasa a masik karakterre.
-     * @param cel A celpont karakter.
-     */
     public abstract void tamad(Karakter cel);
 
-    /**
-     * Ellenorzi, hogy a karakter el-e meg.
-     * @return true, ha hp > 0
-     */
     public boolean elEMeg() {
         return this.hp > 0;
     }
 
-    // --- toString ---
     @Override
     public String toString() {
         return getClass().getSimpleName()
@@ -79,7 +62,6 @@ public abstract class Karakter {
                 + ", speed=" + speed + "]";
     }
 
-    // --- equals ---
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -91,7 +73,6 @@ public abstract class Karakter {
                 && Objects.equals(nev, k.nev);
     }
 
-    // --- hashCode ---
     @Override
     public int hashCode() {
         return Objects.hash(nev, hp, dmg, speed);

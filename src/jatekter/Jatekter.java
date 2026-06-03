@@ -1,32 +1,23 @@
 package jatekter;
 
 import java.util.Objects;
-
-/**
- * Jatekter osztaly - az arena vezerloje.
- * Tartalmaz helyszineket (tombot) es koroket.
- */
 public class Jatekter {
 
-    // --- Adatmezok ---
     private String nev;
-    private int korokSzama;        // osszes kor szama
-    private int aktKor;            // jelenlegi kor
-    private Helyszin[] helyszinek; // helyszinek tombje
+    private int korokSzama;
+    private int aktKor;     
+    private Helyszin[] helyszinek;
 
-    // --- Konstruktor ---
     public Jatekter(String nev, int korokSzama, int helyszinekSzama) {
         this.nev = nev;
         this.korokSzama = korokSzama;
         this.aktKor = 1;
         this.helyszinek = new Helyszin[helyszinekSzama];
-        // Inicializalunk ures helyszineket
         for (int i = 0; i < helyszinekSzama; i++) {
             helyszinek[i] = new Helyszin("Helyszin-" + (i + 1));
         }
     }
 
-    // --- Getterek es Setterek ---
     public String getNev() {
         return nev;
     }
@@ -59,9 +50,7 @@ public class Jatekter {
         this.helyszinek = helyszinek;
     }
 
-    /**
-     * Egy adott helyszint visszaad index alapjan.
-     */
+
     public Helyszin getHelyszin(int index) {
         if (index < 0 || index >= helyszinek.length) {
             throw new ArrayIndexOutOfBoundsException("Ervenytelen helyszin index: " + index);
@@ -70,7 +59,9 @@ public class Jatekter {
     }
 
     /**
-     * Karaktereket elhelyez egy adott helyszinen.
+     * @param helyszinIndex
+     * @param k1
+     * @param k2
      */
     public void karakterElhelyez(int helyszinIndex, Karakter k1, Karakter k2) {
         Helyszin h = getHelyszin(helyszinIndex);
@@ -79,11 +70,7 @@ public class Jatekter {
         System.out.println("Elhelyezve: " + h.helyszinAllapot() + " -> " + h.getNev());
     }
 
-    /**
-     * Egy kor lejatszasa: minden helyszinen az 1. karakter tamadja a 2.-at,
-     * majd a 2. visszatamad (ha meg el).
-     * A kor utan noveljuk az aktKor-t.
-     */
+
     public void korLejaszik() {
         if (aktKor > korokSzama) {
             System.out.println("A jatek veget ert! Osszes kor lejatszva.");
@@ -92,8 +79,7 @@ public class Jatekter {
 
         System.out.println("\n========== " + nev + " - " + aktKor + ". KOR ==========");
 
-        for (int i = 0; i < helyszinek.length; i++) {
-            Helyszin h = helyszinek[i];
+        for (Helyszin h : helyszinek) {
             Karakter k1 = h.getKarakter1();
             Karakter k2 = h.getKarakter2();
 
@@ -104,19 +90,16 @@ public class Jatekter {
                 continue;
             }
 
-            // k1 tamad
             if (k1.elEMeg()) {
                 k1.tamad(k2);
             }
 
-            // k2 visszatamad, ha meg el
             if (k2.elEMeg()) {
                 k2.tamad(k1);
             } else {
                 System.out.println(k2.getNev() + " legyozetek!");
             }
 
-            // Ellenorizzuk k1-et is
             if (!k1.elEMeg()) {
                 System.out.println(k1.getNev() + " legyozetek!");
             }
@@ -125,9 +108,6 @@ public class Jatekter {
         aktKor++;
     }
 
-    /**
-     * Az osszes kor lejatszasa.
-     */
     public void jatekIndit() {
         System.out.println("*** " + nev + " JATEK INDUL! Osszes kor: " + korokSzama + " ***");
         while (aktKor <= korokSzama) {
@@ -137,9 +117,7 @@ public class Jatekter {
         arenaAllapot();
     }
 
-    /**
-     * Kiirja az arena jelenlegi allapotat.
-     */
+
     public void arenaAllapot() {
         System.out.println("\n--- ARENA ALLAPAT [" + nev + "] ---");
         for (Helyszin h : helyszinek) {
@@ -147,7 +125,6 @@ public class Jatekter {
         }
     }
 
-    // --- toString ---
     @Override
     public String toString() {
         return "Jatekter [nev=" + nev
@@ -156,7 +133,6 @@ public class Jatekter {
                 + ", helyszinekSzama=" + helyszinek.length + "]";
     }
 
-    // --- equals ---
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -167,7 +143,6 @@ public class Jatekter {
                 && Objects.equals(nev, j.nev);
     }
 
-    // --- hashCode ---
     @Override
     public int hashCode() {
         return Objects.hash(nev, korokSzama, aktKor);

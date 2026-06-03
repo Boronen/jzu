@@ -2,19 +2,13 @@ package jatekter;
 
 import java.util.Objects;
 
-/**
- * Helyszin osztaly - egy arenahelyet kepvisel.
- * Ket karakter allhat benne: karakter1 es karakter2.
- * Megjelenitese: karakter1_neve , karakter2_neve
- */
+
 public class Helyszin {
 
-    // --- Adatmezok ---
     private String nev;
     private Karakter karakter1;
     private Karakter karakter2;
 
-    // --- Konstruktor ---
     public Helyszin(String nev) {
         this.nev = nev;
         this.karakter1 = null;
@@ -27,7 +21,6 @@ public class Helyszin {
         this.karakter2 = karakter2;
     }
 
-    // --- Getterek es Setterek ---
     public String getNev() {
         return nev;
     }
@@ -53,9 +46,7 @@ public class Helyszin {
     }
 
     /**
-     * Megmutatja a helyszin allapotat a feladat formatumaban:
-     * karakter1_neve , karakter2_neve
-     * Ures hely: _
+     * @return 
      */
     public String helyszinAllapot() {
         String k1 = (karakter1 != null) ? karakter1.getNev() : "_";
@@ -63,14 +54,12 @@ public class Helyszin {
         return k1 + " , " + k2;
     }
 
-    // --- toString ---
     @Override
     public String toString() {
         return "Helyszin [nev=" + nev
                 + ", allapat=" + helyszinAllapot() + "]";
     }
 
-    // --- equals ---
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,7 +70,6 @@ public class Helyszin {
                 && Objects.equals(karakter2, h.karakter2);
     }
 
-    // --- hashCode ---
     @Override
     public int hashCode() {
         return Objects.hash(nev, karakter1, karakter2);

@@ -2,23 +2,18 @@ package jatekter;
 
 import java.util.Objects;
 
-/**
- * Varazslo osztaly - tavoli (ranged) tamado karakter.
- */
+
 public class Varazslo extends Karakter {
 
-    // --- Adatmezok (Varazslo-specifikus) ---
     private int mana;
-    private int tavolsag; // max tamadasi tavolsag
+    private int tavolsag; 
 
-    // --- Konstruktor ---
     public Varazslo(String nev, int hp, int dmg, int speed, int mana, int tavolsag) {
         super(nev, hp, dmg, speed);
         this.mana = mana;
         this.tavolsag = tavolsag;
     }
 
-    // --- Getterek es Setterek ---
     public int getMana() {
         return mana;
     }
@@ -35,7 +30,6 @@ public class Varazslo extends Karakter {
         this.tavolsag = tavolsag;
     }
 
-    // --- Tamadas implementalasa (ranged / varazslas) ---
     @Override
     public void tamad(Karakter cel) {
         if (mana <= 0) {
@@ -50,7 +44,6 @@ public class Varazslo extends Karakter {
         System.out.println(cel.getNev() + " HP-je: " + cel.getHp());
     }
 
-    // --- toString ---
     @Override
     public String toString() {
         return "Varazslo [nev=" + getNev()
@@ -61,7 +54,6 @@ public class Varazslo extends Karakter {
                 + ", tavolsag=" + tavolsag + "]";
     }
 
-    // --- equals ---
     @Override
     public boolean equals(Object o) {
         if (!super.equals(o)) return false;
@@ -69,7 +61,6 @@ public class Varazslo extends Karakter {
         return mana == v.mana && tavolsag == v.tavolsag;
     }
 
-    // --- hashCode ---
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), mana, tavolsag);
